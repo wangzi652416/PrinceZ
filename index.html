@@ -1,21 +1,63 @@
-<html>
+<!DOCTYPE html>
+<html lang="zh">
 <head>
-    <title>Tactile Dictator</title>
-    <script>
-        // Complete implementation of Tactile Dictator
-        class TactileDictator {
-            constructor() {
-                // Initialization code
-            }
-
-            executeCommand(command) {
-                // Execute a given command
-            }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chinese Handwriting Practice Tool</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .progress-bar {
+            width: 100%;
+            background: linear-gradient(to right, green, red);
+            height: 20px;
+            border-radius: 5px;
         }
-    </script>
+        #timer { font-size: 24px; }
+    </style>
 </head>
 <body>
-    <h1>Tactile Dictator</h1>
-    <p>This is an implementation of the Tactile Dictator.</p>
+    <h1>Chinese Handwriting Practice Tool</h1>
+    <div id="words">
+        <h2>Sample Words</h2>
+        <ul>
+            <li><strong>Hello</strong>: 你好</li>
+            <li><strong>Goodbye</strong>: 再见</li>
+            <li><strong>Please</strong>: 请</li>
+            <li><strong>Thank you</strong>: 谢谢</li>
+            <li><strong>Excuse me</strong>: 劳驾</li>
+            <li><strong>Sorry</strong>: 对不起</li>
+            <li><strong>Yes</strong>: 是</li>
+            <li><strong>No</strong>: 不是</li>
+            <li><strong>Help</strong>: 帮助</li>
+            <li><strong>Good morning</strong>: 早上好</li>
+        </ul>
+    </div>
+    <div class="progress-bar" id="progress"></div>
+    <p id="timer">08:00</p>
+    <script>
+        let timeLeft = 480;
+        const timerDisplay = document.getElementById('timer');
+        const progressBar = document.getElementById('progress');
+
+        const countdown = setInterval(() => {
+            if (timeLeft <= 0) {
+                clearInterval(countdown);
+                alert('Time is up!');
+                return;
+            }
+            timeLeft--;
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerDisplay.innerText = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            const percent = (480 - timeLeft) / 480 * 100;
+            progressBar.style.width = percent + '%';
+        }, 1000);
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                alert('Write your word here!');
+            }
+        });
+    </script>
 </body>
 </html>
